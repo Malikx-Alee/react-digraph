@@ -65,7 +65,7 @@ class VerticalTree extends SnapToGrid {
 
       g.setNode(nodeKeyId, { width: width || size, height: height || size });
       nodesMapNode.outgoingEdges.forEach(edge => {
-        g.setEdge(nodeKeyId, `key-${edge.target}`);
+        g.setEdge(nodeKeyId, `key-${edge.target}`, { minlen: 0.25 });
       });
     });
 
