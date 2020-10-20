@@ -33,13 +33,17 @@ class VerticalTree extends SnapToGrid {
     g.setGraph({});
     g.setDefaultEdgeLabel(() => ({}));
 
-    const spacing = nodeSpacingMultiplier || 1.5;
+    g.graph().ranksep = 100;
+    g.graph().nodesep = 25;
+
+    const spacing = nodeSpacingMultiplier || 1.0;
     const size = (nodeSize || 1) * spacing;
     let height;
     let width;
 
     if (nodeHeight) {
-      height = nodeHeight * spacing;
+      // height = nodeHeight * spacing;
+      height = nodeHeight;
     }
 
     if (nodeWidth) {
@@ -65,7 +69,7 @@ class VerticalTree extends SnapToGrid {
 
       g.setNode(nodeKeyId, { width: width || size, height: height || size });
       nodesMapNode.outgoingEdges.forEach(edge => {
-        g.setEdge(nodeKeyId, `key-${edge.target}`, { minlen: 0.25 });
+        g.setEdge(nodeKeyId, `key-${edge.target}`);
       });
     });
 
