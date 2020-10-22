@@ -15,9 +15,12 @@
   limitations under the License.
 */
 
-import { type LayoutEngineType } from '../utilities/layout-engine/layout-engine-types';
-import { type IEdge } from './edge';
-import { type INode } from './node';
+// eslint-disable-next-line prettier/prettier
+import { type LayoutEngineType } from "../utilities/layout-engine/layout-engine-types";
+// eslint-disable-next-line prettier/prettier
+import { type IEdge } from "./edge";
+// eslint-disable-next-line prettier/prettier
+import { type INode } from "./node";
 
 export type IBBox = {
   x: number,
@@ -53,6 +56,10 @@ export type IGraphViewProps = {
   showGraphControls?: boolean,
   zoomDelay?: number,
   zoomDur?: number,
+  nodeWidth?: number,
+  nodeHeight?: number,
+  ranksep?: number,
+  nodesep?: number,
   canCreateEdge?: (startNode?: INode, endNode?: INode) => boolean,
   canDeleteEdge?: (selected: any) => boolean,
   canDeleteNode?: (selected: any) => boolean,

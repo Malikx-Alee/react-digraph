@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 // @flow
 /*
   Copyright(c) 2018 Uber Technologies, Inc.
@@ -15,9 +16,9 @@
   limitations under the License.
 */
 
-import * as dagre from 'dagre';
-import { type INode } from '../../components/node';
-import SnapToGrid from './snap-to-grid';
+import * as dagre from "dagre";
+import { type INode } from "../../components/node";
+import SnapToGrid from "./snap-to-grid";
 
 class VerticalTree extends SnapToGrid {
   adjustNodes(nodes: INode[], nodesMap?: any): INode[] {
@@ -26,6 +27,8 @@ class VerticalTree extends SnapToGrid {
       nodeSize,
       nodeHeight,
       nodeWidth,
+      ranksep,
+      nodesep,
       nodeSpacingMultiplier,
     } = this.graphViewProps;
     const g = new dagre.graphlib.Graph();
@@ -33,8 +36,13 @@ class VerticalTree extends SnapToGrid {
     g.setGraph({});
     g.setDefaultEdgeLabel(() => ({}));
 
-    g.graph().ranksep = 100;
-    g.graph().nodesep = 25;
+    if (ranksep) {
+      g.graph().ranksep = ranksep;
+    }
+
+    if (nodesep) {
+      g.graph().nodesep = nodesep;
+    }
 
     const spacing = nodeSpacingMultiplier || 1.0;
     const size = (nodeSize || 1) * spacing;
@@ -50,7 +58,7 @@ class VerticalTree extends SnapToGrid {
       width = nodeWidth * spacing;
     }
 
-    nodes.forEach(node => {
+    nodes.forEach((node) => {
       if (!nodesMap) {
         return;
       }
@@ -68,14 +76,14 @@ class VerticalTree extends SnapToGrid {
       }
 
       g.setNode(nodeKeyId, { width: width || size, height: height || size });
-      nodesMapNode.outgoingEdges.forEach(edge => {
+      nodesMapNode.outgoingEdges.forEach((edge) => {
         g.setEdge(nodeKeyId, `key-${edge.target}`);
       });
     });
 
     dagre.layout(g);
 
-    g.nodes().forEach(gNodeId => {
+    g.nodes().forEach((gNodeId) => {
       const nodesMapNode = nodesMap[gNodeId];
 
       // gNode is the dagre representation
